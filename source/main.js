@@ -157,3 +157,23 @@ function calculateMousePosition(evt) {
     }
 
 }
+
+function ballReset () {
+
+    BallX = game.width/2;
+    BallY = game.height/2;
+    BallXSpeed *= -1;
+
+    if (winnigScore <= leftPlayerScore || winnigScore <= rightPlayerScore) {
+        showingScore = true;        
+        
+    } 
+    
+}
+
+function dashLine () {
+    for (let i = 0; i <= game.height; i+=30) {
+        colorRect(game.width/2, i, 2, 20, 'white')
+    }    
+
+}
