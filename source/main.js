@@ -11,3 +11,38 @@ const paddleSpeed = 4.2;
 const paddleHeight = 100;
 const paddleThickness = 10;
 const winnigScore = 5;
+
+
+function clickHandle (evt) {
+
+    if (showingScore) {
+        leftPlayerScore = 0;
+        rightPlayerScore = 0;
+        showingScore = false;
+        
+    }
+}
+
+window.onload = function () {
+
+    console.log ("hello World");
+
+    game = document.getElementById ("TennisGame");
+    graph = game. getContext ("2d");
+
+    game.addEventListener('mousedown', clickHandle);
+
+    game.addEventListener("mousemove", function (evt) {
+        var mousePos = calculateMousePosition(evt);        
+        paddle1Y = mousePos.y - paddleHeight/2;
+
+    })        
+
+    const framePerSecond = 50
+    setInterval(function () {
+        moveEverything();
+        drawEverything();
+        
+    }, 1000/framePerSecond);           
+
+}
