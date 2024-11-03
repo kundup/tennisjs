@@ -1,0 +1,13 @@
+var game;
+var graph;
+var BallX = 75, BallY = 75;
+var BallXSpeed = 5, BallYspeed = 5;
+var paddle1Y = 250;
+var paddle2Y = 250;
+var leftPlayerScore = 0;
+var rightPlayerScore = 0;
+var showingScore = false;
+const paddleSpeed = 4.2;
+const paddleHeight = 100;
+const paddleThickness = 10;
+const winnigScore = 5;
