@@ -38,7 +38,7 @@ window.onload = function () {
 
     })        
 
-    const framePerSecond = 50
+    const framePerSecond = 50;
     setInterval(function () {
         moveEverything();
         drawEverything();
@@ -131,7 +131,7 @@ function drawEverything () {
     colorRect (0, paddle1Y, paddleThickness, paddleHeight, "white");
 
     // computer side paddle
-    colorRect (game.width - paddleThickness, paddle2Y, paddleThickness, paddleHeight, "yellow" )
+    colorRect (game.width - paddleThickness, paddle2Y, paddleThickness, paddleHeight, "yellow" );
 
     // new ball shape
     colorCirc (BallX, BallY, 10 ,"white");
@@ -173,7 +173,7 @@ function ballReset () {
 
 function dashLine () {
     for (let i = 0; i <= game.height; i+=30) {
-        colorRect(game.width/2, i, 2, 20, 'white')
+        colorRect(game.width/2, i, 2, 20, 'white');
     }    
 
 }
