@@ -46,3 +46,114 @@ window.onload = function () {
     }, 1000/framePerSecond);           
 
 }
+
+function moveEverything() {
+
+    if (showingScore){
+        return;
+    }
+    BallX += BallXSpeed;
+    console.log (BallX);
+    BallY += BallYspeed;
+
+    moveComputerPaddle ();
+
+    if (BallY >= game.height || BallY <= 0) {
+        BallYspeed *= -1;
+    }
+
+    if (BallX > game.width ) {
+
+        if (BallY > paddle2Y && BallY < (paddle2Y + paddleHeight)) {
+            BallXSpeed *= -1;
+        } else {
+            leftPlayerScore += 1;
+            ballReset();
+        }           
+        
+    }
+
+    if (BallX < 0) {
+        if (BallY > paddle1Y && BallY < (paddle1Y + paddleHeight)) {
+            BallXSpeed *= -1;
+        } else {
+            rightPlayerScore += 1;
+            ballReset();
+        }
+    }
+        
+}
+function moveComputerPaddle (){
+    var paddleCenter = paddle2Y + paddleHeight/2;
+    if (BallY > paddleCenter) {
+        paddle2Y += paddleSpeed;
+    } else {paddle2Y -= paddleSpeed}
+
+}
+
+function colorRect (topleftx, toplefty, boxwidth, boxheight, fillcolor){
+    
+    graph.fillStyle = fillcolor;
+    graph.fillRect (topleftx, toplefty, boxwidth, boxheight);
+
+}
+
+function colorCirc (topleftx, toplefty, radius, fillcolor) {
+    
+    graph.fillStyle = fillcolor;
+    graph.beginPath();
+    graph.arc (topleftx, toplefty, radius, 0, Math.PI*2, true);
+    graph.fill();
+
+} 
+
+function colorText (words, posx, posy, fillcolor){
+    graph.fillStyle = fillcolor;
+    graph.fillText(words, posx, posy);
+
+}
+
+function drawEverything () { 
+    
+    colorRect (0, 0, game.width, game.height, "black");
+
+    if (showingScore){
+        if (leftPlayerScore >= winnigScore) {
+            colorText ("LEFT WINS!", game.width/2, game.height/2, "white");
+
+        } else {
+            colorText ("RIGHT WINS!", game.width/2, game.height/2, "white");
+        }
+
+    } else {          
+
+    // new rectangle paddle
+    colorRect (0, paddle1Y, paddleThickness, paddleHeight, "white");
+
+    // computer side paddle
+    colorRect (game.width - paddleThickness, paddle2Y, paddleThickness, paddleHeight, "yellow" )
+
+    // new ball shape
+    colorCirc (BallX, BallY, 10 ,"white");
+
+    // score board
+    graph.fillText (leftPlayerScore, 200, 100);
+    graph.fillText (rightPlayerScore, 600, 100);
+    
+    // dashline on the board
+    dashLine();
+
+    }
+}
+
+function calculateMousePosition(evt) {
+
+    var rect = game.getBoundingClientRect(), root = document.documentElement;
+    var mouseX = evt.clientX - rect.left - root.scrollLeft;
+    var mouseY = evt.clientY - rect.top - root.scrollTop;
+    return {
+        x: mouseX,
+        y: mouseY
+    }
+
+}
